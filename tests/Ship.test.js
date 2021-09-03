@@ -2,11 +2,15 @@ import { expect } from '@jest/globals';
 import Ship from '../app/Ship';
 
 it('Ship factory creates correct length', () => {
-    expect(Ship(5)).toHaveProperty('length', 5);
+    expect(Ship('Carrier', 5)).toHaveProperty('length', 5);
 });
 
 it('Ship factory creates correct length', () => {
-    expect(Ship(2)).toHaveProperty('length', 2);;
+    expect(Ship('Patrol Boat', 2)).toHaveProperty('length', 2);;
+});
+
+it('Ship factory returns name property', () => {
+    expect(Ship('Submarine', 3)).toHaveProperty('name', 'Submarine');
 });
 
 it('isSunk function return false if hits less than length', () => {
