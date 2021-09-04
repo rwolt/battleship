@@ -1,5 +1,4 @@
 const Player = (name, board) => {
-    let isTurn = false;
     const isHuman = name == 'Computer' ? false : true;
     const guesses = [];
     const makeGuess = () => {
@@ -14,7 +13,6 @@ const Player = (name, board) => {
     return ({
         name,
         board,
-        isTurn,
         isHuman,
         makeGuess
     });

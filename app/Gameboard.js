@@ -58,10 +58,17 @@ const Gameboard = (length) => {
         }
     }
 
+    const allSunk = () => {
+        const shipSpaces = grid.filter(space => space.hasShip);
+        const allSunk = shipSpaces.every(space => space.beenSelected);
+        return allSunk;
+    }
+
     return {
         grid,
         placeShip,
-        receiveAttack
+        receiveAttack,
+        allSunk
     }
 
     }

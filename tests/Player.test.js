@@ -5,11 +5,6 @@ test('Player factory returns name', () => {
     expect(player1.name).toBe('Ray');
 });
 
-test('isTurn property on Player object', () => {
-    let player1 = Player('Ray');
-    expect(player1).toHaveProperty('isTurn', false);
-});
-
 test('isHuman keeps track of computer player', () => {
     let player1 = Player('Ray');
     expect(player1).toHaveProperty('isHuman', true);

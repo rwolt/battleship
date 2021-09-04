@@ -89,6 +89,24 @@ it('board keeps track of spaces that have been selected', () => {
     expect(board.grid[99]).toHaveProperty('beenSelected', false);
 });
 
+it('board keeps track of ship spaces that have been selected', () => {
+    const board = Gameboard(100);
+    const patroller = {name: 'Patrol Boat', length: 2}
+    board.placeShip(patroller, 0, 'horizontal');
+    board.receiveAttack(0);
+    expect(board.grid[0]).toHaveProperty('beenSelected', true);
+});
+
+it('placing a ship does not mark non-ship spaces as selected', () => {
+    const board = Gameboard(100);
+    const patroller = {name: 'Patrol Boat', length: 2}
+    board.placeShip(patroller, 0, 'horizontal');
+    board.receiveAttack(0);
+    expect(board.grid[3]).toHaveProperty('beenSelected', false);
+});
+
+
+
 it('board correctly identifies a miss on empty board', () => {
     const board = Gameboard(100);
     expect(board.receiveAttack(50).msg).toBe('Miss');
@@ -122,4 +140,21 @@ it('board correctly identifies a space that has already been selected', () => {
     board.receiveAttack(80);
     expect(board.receiveAttack(80).msg).toBe('Space has already been selected');
 });
+
+it('board can check if all ships have not been sunk', () => {
+        const board = Gameboard(100);
+        const battleship = {name: 'Battleship', length: 4}
+        board.placeShip(battleship, 60, 'vertical');
+        expect(board.allSunk()).toBe(false);
+});
+
+it('board can check that all ships have been sunk', () => {
+        const board = Gameboard(100);
+        const patroller = {name: 'Patrol Boat', length: 2}
+        board.placeShip(patroller, 0, 'horizontal');
+        board.receiveAttack(0);
+        board.receiveAttack(1);
+        expect(board.allSunk()).toBe(true);
+});
+
 
