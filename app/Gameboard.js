@@ -11,11 +11,31 @@ const Gameboard = (length) => {
     const checkBoundaries = (ship, startIndex, orientation) => {
         switch(orientation) {
             case 'horizontal':
-                return startIndex % 10 + (ship.length - 1) < 10;
+                if(startIndex % 10 + (ship.length - 1) < 10){
+                const squares = [];
+                for(let i = 0; i < ship.length; i++){
+                    squares.push(grid[i]);
+                }
+                if(squares.every(square => square.hasShip === false)) {
+                    return true;
+                }
+                return false;
+            }
+            break;
             case 'vertical':
-                return startIndex + ((ship.length - 1) * 10) < 99
+                if (startIndex + ((ship.length - 1) * 10) < 99) {
+                    const squares = [];
+                    for(let i = 0; i < ship.length; i++){
+                        squares.push(grid[i]);
+                    }
+                    if(squares.every(square => square.hasShip === false)) {
+                        return true;
+                }
+                    return false;
+                }
+            break;
         }
-    }
+    };
 
     const placeShip = (ship, startIndex, orientation) => {
         switch (orientation){
@@ -67,6 +87,7 @@ const Gameboard = (length) => {
     return {
         grid,
         placeShip,
+        checkBoundaries,
         receiveAttack,
         allSunk
     }

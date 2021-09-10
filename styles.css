@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(22, 152, 192, 0.527);
+}
+
+.title {
+    font-size: 40px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.grid-user {
+  width: 500px;
+  height: 500px;
+  box-sizing: content-box;
+  background-color: #ccc;
+  display: flex;
+  margin: 25px;
+  flex-wrap: wrap;
+  border: 1px solid black;
+}
+
+.grid-computer {
+    width: 500px;
+    height: 500px;
+    box-sizing: content-box;
+    background-color: #ccc;
+    display: flex;
+    margin: 25px;
+    flex-wrap: wrap;
+    border: 1px solid black;
+}
+
+.grid-square {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+}
+
+.hit {
+    background-image: url('./images/red-circle.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.miss {
+    background-image: url('./images/white-circle.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+}
+
+.ship-select {
+    width: 500px;
+    height: 500px;
+    margin: 20px;
+    position: absolute;
+    left: 0px;
+}
+
+.ship {
+    display: flex;
+}
+
+.ship div {
+    width: 50px;
+    height: 50px;
+}
+
+.destroyer-container {
+    width: 100px;
+    height: 50px;
+    background-color: orange;
+    margin: 20px;
+}
+
+.destroyer-container-vertical {
+    width: 100px;
+    height: 50px;
+    background-color: orange;
+    margin: 20px;
+    flex-wrap: wrap
+}
+
+.submarine-container {
+    width: 150px;
+    height: 50px;
+    background-color: red;
+    margin: 20px;
+}
+
+.cruiser-container {
+    width: 150px;
+    height: 50px;
+    background-color: purple;
+    margin: 20px;
+}
+
+.battleship-container {
+    width: 200px;
+    height: 50px;
+    background-color: aqua;
+    margin: 20px;
+}
+
+.carrier-container {
+    width: 250px;
+    height: 50px;
+    background-color: green;
+    margin: 20px;
+}
+
