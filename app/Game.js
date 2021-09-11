@@ -32,9 +32,10 @@ const drawGrid = () => {
 }
 
 const drawShips = (board) => {
+    const gridSpaces = userGrid.querySelectorAll('.grid-square');
     board.grid.forEach(space => {
         if(space.hasShip){
-            userGrid[parseInt(space.id)].style.backgroundColor = 'navy';
+            gridSpaces[space.id].style.backgroundColor = 'blue';
         }
     })
 }
@@ -50,12 +51,17 @@ const generateShipObjects = (shipsData) => {
 
 const placeRandomly = (ships, board) => {
     ships.forEach(ship => {
+        //Pick a random index on the grid
         let randomGrid = Math.floor(Math.random() * 100);
+        //Pick a random index of the orientations array
         let randomDirection = Math.floor(Math.random() * 2);
         const orientations = ['horizontal', 'vertical'];
-        while(!board.checkBoundaries(ship, randomGrid, orientations[randomDirection])){
+        //Check if the randomly generated location and orientation is valid
+        let inBounds = board.checkBoundaries(ship, randomGrid, orientations[randomDirection]);
+        while(inBounds === false){
             randomGrid = Math.floor(Math.random() * 100);
             randomDirection = Math.floor(Math.random() * 2);
+            inBounds = board.checkBoundaries(ship, randomGrid, orientations[randomDirection]);
         }
         board.placeShip(ship, randomGrid, orientations[randomDirection]);
     });
@@ -63,9 +69,14 @@ const placeRandomly = (ships, board) => {
 
 const ships = [
     {
-        name: 'Destroyer',
-        length: 2
+        name: 'Carrier',
+        length: 5
     },
+    {
+        name: 'Battleship',
+        length: 4
+    },
+
     {
         name: 'Submarine',
         length: 3
@@ -75,12 +86,8 @@ const ships = [
         length: 3
     },
     {
-        name: 'Battleship',
-        length: 4
-    },
-    {
-        name: 'Carrier',
-        length: 5
+        name: 'Destroyer',
+        length: 2
     }
 ]
 
@@ -90,7 +97,8 @@ const computerShips = generateShipObjects(ships);
 const userShips = generateShipObjects(ships);
 placeRandomly(userShips, players[0].board);
 placeRandomly(computerShips, players[1].board);
-drawShips(player[0].board);
+// console.dir(players[0].board);
+drawShips(players[0].board);
 
 
 

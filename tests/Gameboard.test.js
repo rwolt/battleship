@@ -157,4 +157,12 @@ it('board can check that all ships have been sunk', () => {
         expect(board.allSunk()).toBe(true);
 });
 
+it('checkBoundaries returns false when placing ships on the same index', () => {
+    const battleship = {name: 'Battleship', length: 4};
+    const cruiser = {name: 'Cruiser', length: 3};
+    const board = Gameboard(100);
+    board.placeShip(battleship, 35, 'vertical');
+    expect(board.checkBoundaries(cruiser, 53, 'horizontal')).toBeFalsy;
+});
+
 
