@@ -10,13 +10,23 @@
 <body>
     <h1 class="title">BATTLESHIP</h1>
     <div class="container">
-        <div class="grid-user"></div>
-        <div class="grid-computer"></div>
-    </div>
-        <div class="message-container">
-        <div id="turn">Player 1's Turn</div>
-        <div id="info">The Game is About to Start</div>
+        <div class="user-container">
+            <h2>Player Board</h2>
+            <div class="grid-user"></div>
         </div>
+        <div class="computer-container">
+            <h2>Computer Board</h2>
+            <div class="grid-computer"></div>
+        </div>
+        <button class="start-button">Start</button>
+        <button class="reset-button hidden">Play Again</button>
+        </div>
+        <div class="message-container">
+            <div id="turn">Player 1's Turn</div>
+            <div id="info">The Game is About to Start</div>
+        </div>
+
+    </div>
 <script type="module" src="app/Game.js"></script>
 </body>
 </html>

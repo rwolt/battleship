@@ -5,6 +5,10 @@ import Ship from './Ship.js';
 
 const userGrid = document.querySelector('.grid-user');
 const computerGrid = document.querySelector('.grid-computer');
+const startBtn = document.querySelector('.start-button');
+const resetBtn = document.querySelector('.reset-button');
+let players = [];
+
 
 const createPlayers = () => {
     const player1 = Player('Player 1', Gameboard(100));
@@ -21,7 +25,7 @@ const switchTurn = () => {
 
 const drawGrid = () => {
     domController.drawGrid(userGrid);
-    domController.drawGrid(computerGrid);
+    domController.drawGrid(document.querySelector('.grid-computer'));
     const squares = document.querySelectorAll('.grid-computer .grid-square');
     squares.forEach(square => {
         square.addEventListener('click', (e) => {
@@ -114,6 +118,7 @@ const stopGame = () => {
     const oldComputerGrid = computerGrid;
     const newComputerGrid = computerGrid.cloneNode(true);
     computerGrid.parentNode.replaceChild(newComputerGrid, oldComputerGrid);
+    resetBtn.classList.remove('hidden');
 }
 
 const ships = [
@@ -140,16 +145,35 @@ const ships = [
     }
 ]
 
-let players = createPlayers();
-console.dir(players);
-let opponent = players.filter(player => !player.isTurn);
-console.log(opponent);
-drawGrid();
-const computerShips = generateShipObjects(ships);
-const userShips = generateShipObjects(ships);
-placeRandomly(userShips, players[0].board);
-placeRandomly(computerShips, players[1].board);
-drawShips(players[0].board);
+const init = () => {
+    players = createPlayers();
+    drawGrid();
+    const computerShips = generateShipObjects(ships);
+    const userShips = generateShipObjects(ships);
+    placeRandomly(userShips, players[0].board);
+    placeRandomly(computerShips, players[1].board);
+}
+
+const startGame = () => {
+    drawShips(players[0].board);
+}
+
+const resetGame = () => {
+    domController.resetBoard();
+    resetBtn.classList.add('hidden');
+    init();
+    startGame();
+}
+
+
+startBtn.addEventListener('click', () => {
+    startGame();
+    startBtn.classList.add('hidden');
+});
+
+resetBtn.addEventListener('click', resetGame);
+
+init();
 
 
 
