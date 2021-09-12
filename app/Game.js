@@ -13,14 +13,21 @@ let players = [];
 const createPlayers = () => {
     const player1 = Player('Player 1', Gameboard(100));
     const player2 = Player('Computer', Gameboard(100));
-    player1.isTurn = true;
     return ([player1, player2]);
 }
 
 const switchTurn = () => {
-    players.forEach(player => player.isTurn = !player.isTurn);
-    const currentTurn = players.filter(player => player.isTurn)[0];
-    document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
+    if(players.every(player => !player.isTurn)) {
+        players[0].isTurn = true;
+        const currentTurn = players[0];
+        document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
+    } else {
+        players.forEach(player => player.isTurn = !player.isTurn);
+        const currentTurn = players.filter(player => player.isTurn)[0];
+        document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
+    }
+
+
 }
 
 const drawGrid = () => {
@@ -106,6 +113,7 @@ const checkWinner = () => {
     const opponent = players.filter(player => !player.isTurn);
     if (opponent[0].board.allSunk() === true) {
                         const winner = players.filter(player => player.isTurn)[0];
+                        document.querySelector('#turn').innerText = '';
                         document.querySelector('#info').innerText = `${winner.name} is the Winner!`;
                         stopGame();
                       } else {
@@ -157,6 +165,8 @@ const init = () => {
 
 const startGame = () => {
     drawShips(players[0].board);
+    switchTurn();
+    document.querySelector('#info').innerText = '';
 }
 
 const resetGame = () => {
