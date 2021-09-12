@@ -115,9 +115,10 @@ const checkWinner = () => {
 
 const stopGame = () => {
     //Remove event listeners from the computer grid by cloning the node
-    const oldComputerGrid = computerGrid;
-    const newComputerGrid = computerGrid.cloneNode(true);
-    computerGrid.parentNode.replaceChild(newComputerGrid, oldComputerGrid);
+    const oldComputerGrid = document.querySelector('.grid-computer');
+    const newComputerGrid =oldComputerGrid.cloneNode(true);
+    oldComputerGrid.parentNode.replaceChild(newComputerGrid, oldComputerGrid);
+    newComputerGrid.classList.add('.grid-computer');
     resetBtn.classList.remove('hidden');
 }
 
