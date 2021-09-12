@@ -64,7 +64,8 @@ const Gameboard = (length) => {
             if(square.hasShip) {
                 square.beenSelected = true;
                 const ship = square.ship;
-                return {ship, msg: `${square.ship.name} has been hit!`};
+                ship.hit();
+                return ship.isSunk() ? {ship, msg: `${square.ship.name} has been sunk!`} : {ship, msg: `${square.ship.name} has been hit!`};
             } else {
                 square.beenSelected = true;
                 return {msg: 'Miss'}

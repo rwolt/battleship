@@ -51,11 +51,11 @@ const drawGrid = () => {
                 } else {
                     square.classList.add('miss')
                 }
-                document.querySelector('#info').innerText = response.msg
+                document.querySelector('#info').innerText = response.msg === 'Miss' ? 'Miss' : `Computer's ${response.msg}`;
                 if (checkWinner() === false) {
                     switchTurn();
                     //Wait before making a guess
-                    setTimeout(computerGuess, 800);
+                    setTimeout(computerGuess, 1000);
                 }
             }
         });
@@ -75,7 +75,7 @@ const computerGuess = () => {
     } else {
         userGrid.querySelector(`[data-id='${guess}']`).classList.add('miss');
     }
-    document.querySelector('#info').innerText = response.msg;
+    document.querySelector('#info').innerText = response.msg === 'Miss' ? 'Miss' : `Player 1's ${response.msg}`;
     if (checkWinner() === false) {
         switchTurn();
     };
