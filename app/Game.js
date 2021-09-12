@@ -22,8 +22,14 @@ const switchTurn = () => {
         const currentTurn = players[0];
         document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
     } else {
+        //Switch the state of isTurn for both players
         players.forEach(player => player.isTurn = !player.isTurn);
         const currentTurn = players.filter(player => player.isTurn)[0];
+        if (currentTurn.name === 'Computer') {
+            document.querySelector('.grid-computer').classList.remove('active');
+        } else {
+            document.querySelector('.grid-computer').classList.add('active');
+        }
         document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
     }
 
@@ -36,20 +42,22 @@ const drawGrid = () => {
     const squares = document.querySelectorAll('.grid-computer .grid-square');
     squares.forEach(square => {
         square.addEventListener('click', (e) => {
-            const playersIndex = e.target.parentElement === userGrid ? 0 : 1;
-            let opponentSquare = players[playersIndex].board.grid[square.dataset.id]
-            const response = players[playersIndex].board.receiveAttack(square.dataset.id);
-            if(opponentSquare.hasShip) {
-                square.classList.add('hit')
-            } else {
-                square.classList.add('miss')
+            if (e.target.parentElement.classList.contains('active')) {
+                const playersIndex = e.target.parentElement === userGrid ? 0 : 1;
+                let opponentSquare = players[playersIndex].board.grid[square.dataset.id]
+                const response = players[playersIndex].board.receiveAttack(square.dataset.id);
+                if(opponentSquare.hasShip) {
+                    square.classList.add('hit')
+                } else {
+                    square.classList.add('miss')
+                }
+                document.querySelector('#info').innerText = response.msg
+                if (checkWinner() === false) {
+                    switchTurn();
+                    //Wait before making a guess
+                    setTimeout(computerGuess, 800);
+                }
             }
-            document.querySelector('#info').innerText = response.msg
-            if (checkWinner() === false) {
-                switchTurn();
-                computerGuess();
-            };
-
         });
     });
 }
