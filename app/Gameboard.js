@@ -71,7 +71,7 @@ const Gameboard = (length) => {
                 return {msg: 'Miss'}
             }
         } else {
-            return {msg: 'Space has already been selected'};
+            return {id: 'selected', msg: 'Space has already been selected'};
         }
     }
 

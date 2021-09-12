@@ -46,7 +46,10 @@ const drawGrid = () => {
                 const playersIndex = e.target.parentElement === userGrid ? 0 : 1;
                 let opponentSquare = players[playersIndex].board.grid[square.dataset.id]
                 const response = players[playersIndex].board.receiveAttack(square.dataset.id);
-                if(opponentSquare.hasShip) {
+                if (response.id === 'selected') {
+                    document.querySelector('#info').innerText = response.msg
+                    return;
+                } else if(opponentSquare.hasShip) {
                     square.classList.add('hit')
                 } else {
                     square.classList.add('miss')
