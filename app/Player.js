@@ -1,5 +1,6 @@
 const Player = (name, board) => {
     const isHuman = name == 'Computer' ? false : true;
+    let isTurn = false;
     const guesses = [];
     const makeGuess = () => {
         //Choose an index on the board that is not in the guesses array
@@ -14,6 +15,7 @@ const Player = (name, board) => {
         name,
         board,
         isHuman,
+        isTurn,
         makeGuess
     });
 }

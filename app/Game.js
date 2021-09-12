@@ -9,7 +9,14 @@ const computerGrid = document.querySelector('.grid-computer');
 const createPlayers = () => {
     const player1 = Player('Player 1', Gameboard(100));
     const player2 = Player('Computer', Gameboard(100));
+    player1.isTurn = true;
     return ([player1, player2]);
+}
+
+const switchTurn = () => {
+    players.forEach(player => player.isTurn = !player.isTurn);
+    const currentTurn = players.filter(player => player.isTurn)[0];
+    document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
 }
 
 const drawGrid = () => {
@@ -26,9 +33,33 @@ const drawGrid = () => {
             } else {
                 square.classList.add('miss')
             }
-            document.querySelector('#info').innerText = response.msg;
+            document.querySelector('#info').innerText = response.msg
+            if (checkWinner() === false) {
+                switchTurn();
+                computerGuess();
+            };
+
         });
     });
+}
+
+const computerGuess = () => {
+    let guess = players[1].makeGuess();
+    let opponentSquare = players[0].board.grid[guess];
+    while(opponentSquare.beenSelected) {
+        guess = players[1].makeGuess();
+        opponentSquare = player[0].board.grid[guess];
+    }
+    let response = players[0].board.receiveAttack(guess);
+    if(opponentSquare.hasShip) {
+        userGrid.querySelector(`[data-id='${guess}']`).classList.add('hit');
+    } else {
+        userGrid.querySelector(`[data-id='${guess}']`).classList.add('miss');
+    }
+    document.querySelector('#info').innerText = response.msg;
+    if (checkWinner() === false) {
+        switchTurn();
+    };
 }
 
 const drawShips = (board) => {
@@ -67,6 +98,24 @@ const placeRandomly = (ships, board) => {
     });
 }
 
+const checkWinner = () => {
+    const opponent = players.filter(player => !player.isTurn);
+    if (opponent[0].board.allSunk() === true) {
+                        const winner = players.filter(player => player.isTurn)[0];
+                        document.querySelector('#info').innerText = `${winner.name} is the Winner!`;
+                        stopGame();
+                      } else {
+                          return false;
+                      }
+}
+
+const stopGame = () => {
+    //Remove event listeners from the computer grid by cloning the node
+    const oldComputerGrid = computerGrid;
+    const newComputerGrid = computerGrid.cloneNode(true);
+    computerGrid.parentNode.replaceChild(newComputerGrid, oldComputerGrid);
+}
+
 const ships = [
     {
         name: 'Carrier',
@@ -91,14 +140,18 @@ const ships = [
     }
 ]
 
-const players = createPlayers();
+let players = createPlayers();
+console.dir(players);
+let opponent = players.filter(player => !player.isTurn);
+console.log(opponent);
 drawGrid();
 const computerShips = generateShipObjects(ships);
 const userShips = generateShipObjects(ships);
 placeRandomly(userShips, players[0].board);
 placeRandomly(computerShips, players[1].board);
-// console.dir(players[0].board);
 drawShips(players[0].board);
+
+
 
 
 

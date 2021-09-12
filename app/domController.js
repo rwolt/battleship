@@ -9,7 +9,7 @@ const domController = (() => {
         };
 
     };
-    
+
     return({
         drawGrid
     });

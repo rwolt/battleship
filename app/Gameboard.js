@@ -75,7 +75,7 @@ const Gameboard = (length) => {
     }
 
     const allSunk = () => {
-        const shipSpaces = grid.filter(space => space.hasShip);
+        const shipSpaces = grid.filter(space => space.hasShip === true);
         const allSunk = shipSpaces.every(space => space.beenSelected);
         return allSunk;
     }
