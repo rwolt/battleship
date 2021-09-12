@@ -20,17 +20,17 @@ const switchTurn = () => {
     if(players.every(player => !player.isTurn)) {
         players[0].isTurn = true;
         const currentTurn = players[0];
-        document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
     } else {
         //Switch the state of isTurn for both players
         players.forEach(player => player.isTurn = !player.isTurn);
         const currentTurn = players.filter(player => player.isTurn)[0];
         if (currentTurn.name === 'Computer') {
-            document.querySelector('.grid-computer').classList.remove('active');
+            document.querySelector('.computer-container').classList.toggle('active');
+            document.querySelector('.user-container').classList.toggle('active');
         } else {
-            document.querySelector('.grid-computer').classList.add('active');
+            document.querySelector('.computer-container').classList.toggle('active');
+            document.querySelector('.user-container').classList.toggle('active');
         }
-        document.querySelector('#turn').innerText = `${currentTurn.name}'s Turn`;
     }
 
 
@@ -42,7 +42,7 @@ const drawGrid = () => {
     const squares = document.querySelectorAll('.grid-computer .grid-square');
     squares.forEach(square => {
         square.addEventListener('click', (e) => {
-            if (e.target.parentElement.classList.contains('active')) {
+            if (e.target.parentElement.parentElement.classList.contains('active')) {
                 const playersIndex = e.target.parentElement === userGrid ? 0 : 1;
                 let opponentSquare = players[playersIndex].board.grid[square.dataset.id]
                 const response = players[playersIndex].board.receiveAttack(square.dataset.id);
@@ -58,7 +58,7 @@ const drawGrid = () => {
                 if (checkWinner() === false) {
                     switchTurn();
                     //Wait before making a guess
-                    setTimeout(computerGuess, 1000);
+                    setTimeout(computerGuess, 1200);
                 }
             }
         });
@@ -88,7 +88,7 @@ const drawShips = (board) => {
     const gridSpaces = userGrid.querySelectorAll('.grid-square');
     board.grid.forEach(space => {
         if(space.hasShip){
-            gridSpaces[space.id].style.backgroundColor = 'blue';
+            gridSpaces[space.id].style.backgroundColor = '#888';
         }
     })
 }
@@ -177,7 +177,7 @@ const init = () => {
 const startGame = () => {
     drawShips(players[0].board);
     switchTurn();
-    document.querySelector('#info').innerText = '';
+    document.querySelector('#info').innerText = 'The Game is About to Start';
 }
 
 const resetGame = () => {

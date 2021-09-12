@@ -5,26 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
     <title>Battleship</title>
 </head>
 <body>
     <h1 class="title">BATTLESHIP</h1>
+    <div class="message-container">
+        <div id="info">The Game is About to Start</div>
+    </div>
     <div id="turn"></div>
     <div class="container">
         <div class="user-container">
             <h2>Player Board</h2>
             <div class="grid-user"></div>
         </div>
-        <div class="computer-container">
+        <div class="computer-container active">
             <h2>Computer Board</h2>
-            <div class="grid-computer active"></div>
+            <div class="grid-computer"></div>
         </div>
         <button class="start-button">Start</button>
         <button class="reset-button hidden">Play Again</button>
         </div>
-        <div class="message-container">
-            <div id="info">The Game is About to Start</div>
-        </div>
+
 
     </div>
 <script type="module" src="app/Game.js"></script>

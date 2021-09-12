@@ -6,11 +6,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(22, 152, 192, 0.527);
+    background-color: rgba(0, 172, 251, 0.527);
+    font-family: 'Courier', monospace;
 }
 
 .title {
-    font-size: 40px;
+    font-size: 50px;
+    font-family: 'Graduate', cursive;
+    letter-spacing: 3px;
+
 }
 
 .container {
@@ -26,11 +30,29 @@ body {
 }
 
 .user-container h2, .computer-container h2 {
-    margin: 0;
+    margin: 30px 0px 0px 0px;
+    padding: 0px 50px;
+}
+
+.computer-container h2 {
+    background-image: url(./images/blue-circle.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 10% 40%;
+}
+
+.user-container h2 {
+    background-image: url(./images/blue-circle.png);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 90% 40%;
+}
+.user-container.active h2, .computer-container.active h2 {
+    background-image: none;
 }
 
 .message-container {
-    font-size: 24px;
+    font-size: 30px;
 }
 #turn {
     font-size: 24px;
@@ -40,7 +62,7 @@ body {
   width: 500px;
   height: 500px;
   box-sizing: content-box;
-  background-color: #ccc;
+  background-color: #c5c5c5;
   display: flex;
   margin: 25px;
   flex-wrap: wrap;
@@ -51,7 +73,7 @@ body {
     width: 500px;
     height: 500px;
     box-sizing: content-box;
-    background-color: #ccc;
+    background-color: #c5c5c5;
     display: flex;
     margin: 25px;
     flex-wrap: wrap;
@@ -95,48 +117,6 @@ body {
     height: 50px;
 }
 
-.destroyer-container {
-    width: 100px;
-    height: 50px;
-    background-color: orange;
-    margin: 20px;
-}
-
-.destroyer-container-vertical {
-    width: 100px;
-    height: 50px;
-    background-color: orange;
-    margin: 20px;
-    flex-wrap: wrap
-}
-
-.submarine-container {
-    width: 150px;
-    height: 50px;
-    background-color: red;
-    margin: 20px;
-}
-
-.cruiser-container {
-    width: 150px;
-    height: 50px;
-    background-color: purple;
-    margin: 20px;
-}
-
-.battleship-container {
-    width: 200px;
-    height: 50px;
-    background-color: aqua;
-    margin: 20px;
-}
-
-.carrier-container {
-    width: 250px;
-    height: 50px;
-    background-color: green;
-    margin: 20px;
-}
 
 .start-button, .reset-button {
     position: absolute;
