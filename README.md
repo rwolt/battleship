@@ -4,3 +4,5 @@ Skills demonstrated:
 Practicing Test Driven Development
 Writing Unit Tests using the Jest framework
 Object oriented programming in vanilla JS
+
+[Live Preview](https://rwolt.github.io/battleship/)
